@@ -5,11 +5,18 @@ body {
   color: white;
 }
 
+/* HEADER */
 header {
   text-align: center;
   padding: 20px;
 }
 
+header h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+/* FILTERS */
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -19,13 +26,50 @@ header {
 }
 
 input, select {
-  padding: 8px;
-  border-radius: 8px;
+  padding: 10px;
+  border-radius: 10px;
   border: none;
   background: #1a1a22;
   color: white;
+  outline: none;
+  transition: 0.2s;
 }
 
+input:focus, select:focus {
+  box-shadow: 0 0 0 2px #ff4da6;
+}
+
+/* TAG BAR */
+.tag-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+}
+
+.tag {
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #1a1a22;
+  cursor: pointer;
+  font-size: 12px;
+  transition: 0.2s;
+  user-select: none;
+}
+
+.tag:hover {
+  transform: scale(1.05);
+  background: #2a2a35;
+}
+
+.tag.active {
+  background: #ff4da6;
+  color: white;
+  box-shadow: 0 0 10px rgba(255, 77, 166, 0.4);
+}
+
+/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -33,26 +77,29 @@ input, select {
   padding: 20px;
 }
 
+/* CARD */
 .card {
   background: #1a1a22;
-  border-radius: 12px;
+  border-radius: 14px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.25s, box-shadow 0.25s;
 }
 
 .card:hover {
-  transform: scale(1.03);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
 .card img {
   width: 100%;
-  height: 220px;
+  height: 230px;
   object-fit: cover;
 }
 
 .card h3 {
   margin: 8px;
+  font-size: 16px;
 }
 
 .card p {
@@ -68,41 +115,61 @@ input, select {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85);
   display: flex;
   justify-content: center;
   align-items: center;
+  backdrop-filter: blur(6px);
 }
 
 .modal-content {
   background: #1a1a22;
   padding: 20px;
-  border-radius: 12px;
-  width: 300px;
+  border-radius: 16px;
+  width: 320px;
   text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+  position: relative;
 }
 
 .modal-content img {
   width: 100%;
-  border-radius: 10px;
+  border-radius: 12px;
+  margin-bottom: 10px;
 }
 
 .close {
-  float: right;
+  position: absolute;
+  top: 10px;
+  right: 12px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 22px;
+  opacity: 0.7;
 }
 
-.hidden {
-  display: none;
+.close:hover {
+  opacity: 1;
 }
 
+/* BUTTON */
 button {
   margin-top: 10px;
-  padding: 8px;
+  padding: 10px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   background: #ff4da6;
   color: white;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: #ff2f91;
+}
+
+/* HIDDEN STATE */
+.hidden {
+  display: none;
 }

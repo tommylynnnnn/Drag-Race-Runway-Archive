@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Runway Archive</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>👠 Runway Archive</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <!-- HEADER -->
   <header>
     <h1>👠 Runway Archive</h1>
     <p>Drag Race look database</p>
@@ -16,7 +17,11 @@
   <!-- FILTERS -->
   <section class="filters">
 
-    <input id="searchBar" type="text" placeholder="Search looks (gown, latex, iconic...)" />
+    <input
+      id="searchBar"
+      type="text"
+      placeholder="Search looks (gown, latex, iconic...)"
+    >
 
     <select id="seasonFilter">
       <option value="all">All Seasons</option>
@@ -35,31 +40,51 @@
 
   </section>
 
-  <!-- TAG FILTER BAR (NEW CORE FEATURE) -->
+  <!-- TAG FILTERS -->
   <section id="tagBar" class="tag-bar"></section>
 
-  <!-- GRID -->
+  <!-- LOOK GRID -->
   <main>
+
     <div id="grid" class="grid"></div>
+
+    <!-- LOAD MORE BUTTON -->
+    <div class="load-more-container">
+      <button id="loadMoreBtn">
+        Load More Looks
+      </button>
+    </div>
+
   </main>
 
-  <!-- MODAL -->
+  <!-- LOOK DETAILS MODAL -->
   <div id="modal" class="modal hidden">
+
     <div class="modal-content">
 
       <span id="closeModal" class="close">&times;</span>
 
-      <img id="modalImg" />
+      <img
+        id="modalImg"
+        src=""
+        alt="Runway Look"
+      >
 
       <h2 id="modalQueen"></h2>
+
       <p id="modalInfo"></p>
+
       <p id="modalRunway"></p>
 
-      <button id="favBtn">❤️ Favorite</button>
+      <button id="favBtn">
+        ❤️ Favorite
+      </button>
 
     </div>
+
   </div>
 
   <script src="game.js"></script>
+
 </body>
 </html>

@@ -16,6 +16,10 @@ header h1 {
   font-size: 32px;
 }
 
+header p {
+  opacity: 0.8;
+}
+
 /* FILTERS */
 .filters {
   display: flex;
@@ -25,7 +29,8 @@ header h1 {
   padding: 10px;
 }
 
-input, select {
+input,
+select {
   padding: 10px;
   border-radius: 10px;
   border: none;
@@ -35,7 +40,12 @@ input, select {
   transition: 0.2s;
 }
 
-input:focus, select:focus {
+input {
+  min-width: 250px;
+}
+
+input:focus,
+select:focus {
   box-shadow: 0 0 0 2px #ff4da6;
 }
 
@@ -88,13 +98,14 @@ input:focus, select:focus {
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
 .card img {
   width: 100%;
   height: 230px;
   object-fit: cover;
+  display: block;
 }
 
 .card h3 {
@@ -108,6 +119,16 @@ input:focus, select:focus {
   opacity: 0.8;
 }
 
+/* LOAD MORE */
+.load-more-container {
+  text-align: center;
+  padding: 20px 20px 40px;
+}
+
+#loadMoreBtn {
+  min-width: 220px;
+}
+
 /* MODAL */
 .modal {
   position: fixed;
@@ -115,11 +136,12 @@ input:focus, select:focus {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.85);
+  background: rgba(0, 0, 0, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(6px);
+  z-index: 1000;
 }
 
 .modal-content {
@@ -127,8 +149,9 @@ input:focus, select:focus {
   padding: 20px;
   border-radius: 16px;
   width: 320px;
+  max-width: 90vw;
   text-align: center;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
   position: relative;
 }
 
@@ -145,16 +168,17 @@ input:focus, select:focus {
   cursor: pointer;
   font-size: 22px;
   opacity: 0.7;
+  transition: 0.2s;
 }
 
 .close:hover {
   opacity: 1;
 }
 
-/* BUTTON */
+/* BUTTONS */
 button {
   margin-top: 10px;
-  padding: 10px;
+  padding: 10px 16px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -169,7 +193,22 @@ button:hover {
   background: #ff2f91;
 }
 
-/* HIDDEN STATE */
+/* HIDDEN */
 .hidden {
   display: none;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .card img {
+    height: 200px;
+  }
+
+  input {
+    min-width: 180px;
+  }
 }

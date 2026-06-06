@@ -181,6 +181,9 @@ const looks = [
   }
 ];
 
+// -------------------- SORT A → Z --------------------
+looks.sort((a, b) => a.queen.localeCompare(b.queen));
+
 // -------------------- STORAGE --------------------
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 let selectedLook = null;
@@ -189,19 +192,14 @@ let activeTags = [];
 // -------------------- PAGINATION --------------------
 let currentPage = 1;
 const looksPerPage = 50;
-let currentFilteredLooks = looks;
+let currentFilteredLooks = [...looks];
 
 // -------------------- RENDER GRID --------------------
 function renderLooks(data) {
   const grid = document.getElementById("grid");
   const loadMoreBtn = document.getElementById("loadMoreBtn");
 
-  grid.innerHTML = "";
-
-  const visibleLooks = data.slice(
-    0,
-    currentPage * looksPerPage
-  );
+  const visibleLooks = data.slice(0, currentPage * looksPerPage);
 
   let html = "";
 
@@ -234,7 +232,7 @@ function filterLooks() {
   const season = document.getElementById("seasonFilter").value;
   const episode = document.getElementById("episodeFilter").value;
 
-  let filtered = looks;
+  let filtered = [...looks];
 
   if (season !== "all") {
     filtered = filtered.filter(l => l.season == season);
@@ -254,9 +252,7 @@ function filterLooks() {
     filtered = filtered.filter(l =>
       l.queen.toLowerCase().includes(search) ||
       l.runway.toLowerCase().includes(search) ||
-      l.tags.some(tag =>
-        tag.toLowerCase().includes(search)
-      )
+      l.tags.some(tag => tag.toLowerCase().includes(search))
     );
   }
 
@@ -278,6 +274,8 @@ const allTags = [
   "alternative",
   "avant-garde"
 ];
+
+// (keep your existing tag, modal, favorites, events code exactly the same)
 
 function renderTags() {
   const bar = document.getElementById("tagBar");

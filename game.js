@@ -3,7 +3,7 @@ const looks = [
     id: 1,
     queen: "Akashia",
     season: 1,
-    episode: o,
+    episode: 0,
     runway: "Best Drag",
     image: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8a/AkashiaPromoHD.png/revision/latest?cb=20170712132526",
     colors: ["teal"],

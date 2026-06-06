@@ -6,7 +6,8 @@ const looks = [
     runway: "Princess Eleganza",
     placement: 1,
     image: "https://via.placeholder.com/300x400",
-    colors: ["gold", "white"]
+    colors: ["gold", "white"],
+    tags: ["elegant", "gown", "pageant"]
   },
   {
     queen: "Jinkx Monsoon",
@@ -15,7 +16,8 @@ const looks = [
     runway: "Pants Down Bottoms Up",
     placement: 7,
     image: "https://via.placeholder.com/300x400",
-    colors: ["red", "black"]
+    colors: ["red", "black"],
+    tags: ["camp", "comedy", "weird"]
   },
   {
     queen: "Symone",
@@ -24,11 +26,12 @@ const looks = [
     runway: "Entrance Look",
     placement: 1,
     image: "https://via.placeholder.com/300x400",
-    colors: ["black", "gold"]
+    colors: ["black", "gold"],
+    tags: ["fashion", "iconic"]
   }
 ];
 
-// Render function
+// Render
 function renderLooks(data) {
   const grid = document.getElementById("grid");
   grid.innerHTML = "";
@@ -45,27 +48,48 @@ function renderLooks(data) {
   });
 }
 
-// Filter function
+// Filtering logic
 function filterLooks() {
+  const search = document.getElementById("searchBar").value.toLowerCase();
   const season = document.getElementById("seasonFilter").value;
-  const color = document.getElementById("colorFilter").value;
+  const queen = document.getElementById("queenFilter").value;
+  const episode = document.getElementById("episodeFilter").value;
 
   let filtered = looks;
 
+  // season filter
   if (season !== "all") {
     filtered = filtered.filter(l => l.season == season);
   }
 
-  if (color !== "all") {
-    filtered = filtered.filter(l => l.colors.includes(color));
+  // queen filter
+  if (queen !== "all") {
+    filtered = filtered.filter(l => l.queen === queen);
+  }
+
+  // episode filter
+  if (episode !== "all") {
+    filtered = filtered.filter(l => l.episode == episode);
+  }
+
+  // search filter (VERY powerful)
+  if (search !== "") {
+    filtered = filtered.filter(l =>
+      l.queen.toLowerCase().includes(search) ||
+      l.runway.toLowerCase().includes(search) ||
+      l.tags.some(tag => tag.includes(search)) ||
+      l.colors.some(color => color.includes(search))
+    );
   }
 
   renderLooks(filtered);
 }
 
 // Event listeners
+document.getElementById("searchBar").addEventListener("input", filterLooks);
 document.getElementById("seasonFilter").addEventListener("change", filterLooks);
-document.getElementById("colorFilter").addEventListener("change", filterLooks);
+document.getElementById("queenFilter").addEventListener("change", filterLooks);
+document.getElementById("episodeFilter").addEventListener("change", filterLooks);
 
 // Initial render
 renderLooks(looks);

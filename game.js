@@ -28,6 +28,16 @@ const looks = [
     image: "https://i.pinimg.com/736x/48/de/bf/48debfd162d08df98ab9d570526c6759.jpg",
     colors: ["black"],
     tags: ["catsuit", "fashion"]
+  },
+  {
+    id: 4,
+    queen: "BeBe Zahara Benet",
+    season: 1,
+    episode: 0,
+    runway: "Drag Race",
+    image: "https://i.pinimg.com/736x/0c/99/26/0c9926aa8bf1add845ab6ac74319a1c9.jpg",
+    colors: ["black", "pink"],
+    tags: ["fashion"]
   }
 ];
 

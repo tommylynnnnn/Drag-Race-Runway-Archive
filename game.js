@@ -38,6 +38,146 @@ const looks = [
     image: "https://i.pinimg.com/736x/0c/99/26/0c9926aa8bf1add845ab6ac74319a1c9.jpg",
     colors: ["black", "pink"],
     tags: ["fashion"]
+  },
+  {
+    id: 5,
+    queen: "Jade",
+    season: 1,
+    episode: 0,
+    runway: "Best Drag",
+    image: "https://i.pinimg.com/736x/a5/d9/ba/a5d9ba7ef4e52f1948a6fd9de5ffa2fa.jpg",
+    colors: ["white", "black"],
+    tags: ["fashion", "streetwear"]
+  },
+  {
+    id: 6,
+    queen: "Jade",
+    season: 1,
+    episode: 0,
+    runway: "Drag Race",
+    image: "https://i.pinimg.com/736x/d8/33/c6/d833c699bea73cabde111213408268a6.jpg",
+    colors: ["dark blue"],
+    tags: ["fashion", "denim"]
+  },
+  {
+    id: 7,
+    queen: "Nina Flowers",
+    season: 1,
+    episode: 0,
+    runway: "Best Drag",
+    image: "https://i.pinimg.com/736x/c3/99/5b/c3995b846b4efa4a50385671fb31367f.jpg",
+    colors: ["burgundy"],
+    tags: ["patterned", "alternative"]
+  },
+  {
+    id: 8,
+    queen: "Nina Flowers",
+    season: 1,
+    episode: 0,
+    runway: "Drag Race",
+    image: "https://i.pinimg.com/736x/e3/51/67/e351679d2cbdd313d230bbaa28fde421.jpg",
+    colors: ["dark blue"],
+    tags: ["alternative", "denim"]
+  },
+  {
+    id: 9,
+    queen: "Ongina",
+    season: 1,
+    episode: 0,
+    runway: "Best Drag",
+    image: "https://i.pinimg.com/736x/9e/ac/db/9eacdb1b729cb2f306e25250fe6c5476.jpg",
+    colors: ["black"],
+    tags: ["fashion"]
+  },
+  {
+    id: 10,
+    queen: "Ongina",
+    season: 1,
+    episode: 0,
+    runway: "Drag Race",
+    image: "https://i.pinimg.com/736x/ef/85/a0/ef85a0f08b06681b03f4a930f1024632.jpg",
+    colors: ["dark blue", "yellow"],
+    tags: ["fashion", "denim", "camp"]
+  },
+  {
+    id: 11,
+    queen: "Rebecca Glasscock",
+    season: 1,
+    episode: 0,
+    runway: "Best Drag",
+    image: "https://i.pinimg.com/736x/42/8d/f6/428df6c5b78c9648d7a1839fe19a41c2.jpg",
+    colors: ["black", "white"],
+    tags: ["fashion", "patterned", "cocktail dress"]
+  },
+  {
+    id: 12,
+    queen: "Rebecca Glasscock",
+    season: 1,
+    episode: 0,
+    runway: "Drag Race",
+    image: "https://i.pinimg.com/736x/7e/8d/50/7e8d501aededf0bc4a8e3c475debc195.jpg",
+    colors: ["dark blue", "black", "white"],
+    tags: ["fashion", "denim", "patterned"]
+  },
+  {
+    id: 13,
+    queen: "Shannel",
+    season: 1,
+    episode: 0,
+    runway: "Best Drag",
+    image: "https://i.pinimg.com/736x/f2/09/41/f2094136135fa4d666a499c030990e7f.jpg",
+    colors: ["brown", "gold", "bronze"],
+    tags: ["fashion", "avant-garde"]
+  },
+  {
+    id: 14,
+    queen: "Shannel",
+    season: 1,
+    episode: 0,
+    runway: "Drag Race",
+    image: "https://i.pinimg.com/736x/2c/0f/1d/2c0f1d84e734c3c4204cb4810035d8d2.jpg",
+    colors: ["dark blue", "black"],
+    tags: ["fashion", "denim"]
+  },
+  {
+    id: 15,
+    queen: "Tammie Brown",
+    season: 1,
+    episode: 0,
+    runway: "Best Drag",
+    image: "https://i.pinimg.com/736x/dd/d8/96/ddd896945713675c522f0da2a0e16e72.jpg",
+    colors: ["black"],
+    tags: ["camp", "fashion"]
+  },
+  {
+    id: 16,
+    queen: "Tammie Brown",
+    season: 1,
+    episode: 0,
+    runway: "Drag Race",
+    image: "https://i.pinimg.com/736x/ee/c0/df/eec0df427b5a392ca15eda339c9e4dad.jpg",
+    colors: ["dark blue"],
+    tags: ["camp", "denim"]
+  },
+  {
+    id: 17,
+    queen: "Victoria 'Porkchop' Parker",
+    season: 1,
+    episode: 0,
+    runway: "Best Drag",
+    image: "https://i.pinimg.com/736x/2e/8b/47/2e8b47d6f9b528e31faa7fb3f44ec80d.jpg",
+    colors: ["black"],
+    tags: ["fashion"]
+  },
+  {
+    id: 18,
+    queen: "Victoria 'Porkchop' Parker",
+    season: 1,
+    episode: 0,
+    runway: "Drag Race",
+    image: "https://i.pinimg.com/736x/01/ed/fb/01edfb4ca4412dcc2de2a8fd82edd59d.jpg",
+    colors: ["dark blue"],
+    tags: ["denim"]
   }
 ];
 
@@ -129,10 +269,14 @@ function filterLooks() {
 // -------------------- TAG SYSTEM --------------------
 const allTags = [
   "camp",
-  "comedy",
   "cocktail dress",
   "fashion",
-  "catsuit"
+  "catsuit",
+  "streetwear",
+  "denim",
+  "patterned",
+  "alternative",
+  "avant-garde"
 ];
 
 function renderTags() {

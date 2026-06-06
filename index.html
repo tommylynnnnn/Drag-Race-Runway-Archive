@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Runway Archive</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>👠 Runway Archive</h1>
+    <p>Drag Race look database</p>
+  </header>
+
+  <section class="filters">
+
+    <select id="seasonFilter">
+      <option value="all">All Seasons</option>
+      <option value="1">Season 1</option>
+      <option value="2">Season 2</option>
+      <option value="15">Season 15</option>
+    </select>
+
+    <select id="colorFilter">
+      <option value="all">All Colors</option>
+      <option value="red">Red</option>
+      <option value="black">Black</option>
+      <option value="gold">Gold</option>
+      <option value="white">White</option>
+    </select>
+
+  </section>
+
+  <main>
+    <div id="grid" class="grid"></div>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>

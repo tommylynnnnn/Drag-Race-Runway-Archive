@@ -17,15 +17,22 @@ header h1 {
 
 .filters {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
   padding: 10px;
 }
 
-select {
+select, input {
   padding: 8px;
   border-radius: 8px;
   border: none;
+  background: #1a1a22;
+  color: white;
+}
+
+input {
+  min-width: 220px;
 }
 
 .grid {

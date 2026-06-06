@@ -18,6 +18,16 @@ const looks = [
     image: "https://i.pinimg.com/736x/87/15/ae/8715ae679efa31c97ca9840a17e1f189.jpg",
     colors: ["red", "black"],
     tags: ["cocktail dress", "fashion"]
+  },
+  {
+    id: 3,
+    queen: "BeBe Zahara Benet",
+    season: 1,
+    episode: 0,
+    runway: "Best Drag",
+    image: "https://i.pinimg.com/736x/48/de/bf/48debfd162d08df98ab9d570526c6759.jpg",
+    colors: ["black"],
+    tags: ["catsuit", "fashion"]
   }
 ];
 
@@ -88,7 +98,8 @@ const allTags = [
   "camp",
   "comedy",
   "cocktail dress",
-  "fashion"
+  "fashion",
+  "catsuit"
 ];
 
 function renderTags() {

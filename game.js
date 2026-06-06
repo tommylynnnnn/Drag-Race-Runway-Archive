@@ -11,23 +11,22 @@ const looks = [
   },
   {
     id: 2,
-    queen: "Jinkx Monsoon",
-    season: 5,
-    episode: 2,
-    runway: "Pants Down Bottoms Up",
-    image: "https://via.placeholder.com/300x400",
+    queen: "Akashia",
+    season: 1,
+    episode: 0,
+    runway: "Drag Race",
+    image: "https://i.pinimg.com/736x/87/15/ae/8715ae679efa31c97ca9840a17e1f189.jpg",
     colors: ["red", "black"],
-    tags: ["camp", "comedy"]
+    tags: ["cocktail dress", "fashion"]
   }
 ];
 
-// FAVORITES (stored in browser)
+// STORAGE
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-
-// CURRENT SELECTED LOOK
 let selectedLook = null;
+let activeTags = [];
 
-// RENDER GRID
+// -------------------- RENDER GRID --------------------
 function renderLooks(data) {
   const grid = document.getElementById("grid");
   grid.innerHTML = "";
@@ -37,7 +36,7 @@ function renderLooks(data) {
 
     grid.innerHTML += `
       <div class="card" onclick="openModal(${l.id})">
-        <img src="${l.image}">
+        <img src="${l.image}" alt="${l.queen}">
         <h3>${l.queen}</h3>
         <p>Season ${l.season} • Episode ${l.episode}</p>
         <p>${l.runway}</p>
@@ -47,31 +46,77 @@ function renderLooks(data) {
   });
 }
 
-// FILTERS (same logic as Tier 1)
+// -------------------- FILTER SYSTEM --------------------
 function filterLooks() {
   const search = document.getElementById("searchBar").value.toLowerCase();
   const season = document.getElementById("seasonFilter").value;
-  const queen = document.getElementById("queenFilter").value;
   const episode = document.getElementById("episodeFilter").value;
 
   let filtered = looks;
 
-  if (season !== "all") filtered = filtered.filter(l => l.season == season);
-  if (queen !== "all") filtered = filtered.filter(l => l.queen === queen);
-  if (episode !== "all") filtered = filtered.filter(l => l.episode == episode);
+  // season filter
+  if (season !== "all") {
+    filtered = filtered.filter(l => l.season == season);
+  }
 
+  // episode filter
+  if (episode !== "all") {
+    filtered = filtered.filter(l => l.episode == episode);
+  }
+
+  // TAG FILTER (IMPORTANT UPGRADE)
+  if (activeTags.length > 0) {
+    filtered = filtered.filter(l =>
+      activeTags.every(tag => l.tags.includes(tag))
+    );
+  }
+
+  // SEARCH FILTER
   if (search) {
     filtered = filtered.filter(l =>
       l.queen.toLowerCase().includes(search) ||
       l.runway.toLowerCase().includes(search) ||
-      l.tags.some(t => t.includes(search))
+      l.tags.some(tag => tag.toLowerCase().includes(search))
     );
   }
 
   renderLooks(filtered);
 }
 
-// OPEN MODAL
+// -------------------- TAG SYSTEM --------------------
+const allTags = [
+  "camp",
+  "comedy",
+  "cocktail dress",
+  "fashion"
+];
+
+function renderTags() {
+  const bar = document.getElementById("tagBar");
+  bar.innerHTML = "";
+
+  allTags.forEach(tag => {
+    bar.innerHTML += `
+      <div class="tag ${activeTags.includes(tag) ? "active" : ""}"
+           onclick="toggleTag('${tag}')">
+        ${tag}
+      </div>
+    `;
+  });
+}
+
+function toggleTag(tag) {
+  if (activeTags.includes(tag)) {
+    activeTags = activeTags.filter(t => t !== tag);
+  } else {
+    activeTags.push(tag);
+  }
+
+  renderTags();
+  filterLooks();
+}
+
+// -------------------- MODAL --------------------
 function openModal(id) {
   selectedLook = looks.find(l => l.id === id);
 
@@ -82,17 +127,17 @@ function openModal(id) {
   document.getElementById("modalRunway").innerText = selectedLook.runway;
 
   updateFavButton();
-
   document.getElementById("modal").classList.remove("hidden");
 }
 
-// CLOSE MODAL
 document.getElementById("closeModal").onclick = () => {
   document.getElementById("modal").classList.add("hidden");
 };
 
-// FAVORITE SYSTEM
+// -------------------- FAVORITES --------------------
 function toggleFavorite() {
+  if (!selectedLook) return;
+
   const id = selectedLook.id;
 
   if (favorites.includes(id)) {
@@ -102,8 +147,9 @@ function toggleFavorite() {
   }
 
   localStorage.setItem("favorites", JSON.stringify(favorites));
+
   updateFavButton();
-  renderLooks(looks);
+  filterLooks(); // IMPORTANT FIX: re-filter instead of full reset
 }
 
 function updateFavButton() {
@@ -111,20 +157,18 @@ function updateFavButton() {
 
   if (!selectedLook) return;
 
-  if (favorites.includes(selectedLook.id)) {
-    btn.innerText = "💔 Unfavorite";
-  } else {
-    btn.innerText = "❤️ Favorite";
-  }
+  btn.innerText = favorites.includes(selectedLook.id)
+    ? "💔 Unfavorite"
+    : "❤️ Favorite";
 }
 
-// EVENTS
+// -------------------- EVENTS --------------------
 document.getElementById("favBtn").onclick = toggleFavorite;
 
 document.getElementById("searchBar").addEventListener("input", filterLooks);
 document.getElementById("seasonFilter").addEventListener("change", filterLooks);
-document.getElementById("queenFilter").addEventListener("change", filterLooks);
 document.getElementById("episodeFilter").addEventListener("change", filterLooks);
 
-// INIT
+// -------------------- INIT --------------------
+renderTags();
 renderLooks(looks);

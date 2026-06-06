@@ -13,22 +13,16 @@
     <p>Drag Race look database</p>
   </header>
 
+  <!-- FILTERS -->
   <section class="filters">
 
-    <input id="searchBar" type="text" placeholder="Search looks..." />
+    <input id="searchBar" type="text" placeholder="Search looks (gown, latex, iconic...)" />
 
     <select id="seasonFilter">
       <option value="all">All Seasons</option>
       <option value="1">Season 1</option>
       <option value="2">Season 2</option>
       <option value="15">Season 15</option>
-    </select>
-
-    <select id="queenFilter">
-      <option value="all">All Queens</option>
-      <option value="Akashia">Akashia</option>
-      <option value="Jinkx Monsoon">Jinkx Monsoon</option>
-      <option value="Symone">Symone</option>
     </select>
 
     <select id="episodeFilter">
@@ -41,6 +35,10 @@
 
   </section>
 
+  <!-- TAG FILTER BAR (NEW CORE FEATURE) -->
+  <section id="tagBar" class="tag-bar"></section>
+
+  <!-- GRID -->
   <main>
     <div id="grid" class="grid"></div>
   </main>
@@ -48,14 +46,17 @@
   <!-- MODAL -->
   <div id="modal" class="modal hidden">
     <div class="modal-content">
+
       <span id="closeModal" class="close">&times;</span>
 
       <img id="modalImg" />
+
       <h2 id="modalQueen"></h2>
       <p id="modalInfo"></p>
       <p id="modalRunway"></p>
 
       <button id="favBtn">❤️ Favorite</button>
+
     </div>
   </div>
 

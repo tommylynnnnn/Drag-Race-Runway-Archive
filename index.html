@@ -15,11 +15,7 @@
 
   <section class="filters">
 
-    <input 
-      id="searchBar" 
-      type="text" 
-      placeholder="Search looks (gown, latex, red...)"
-    />
+    <input id="searchBar" type="text" placeholder="Search looks..." />
 
     <select id="seasonFilter">
       <option value="all">All Seasons</option>
@@ -47,6 +43,20 @@
   <main>
     <div id="grid" class="grid"></div>
   </main>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+
+      <img id="modalImg" />
+      <h2 id="modalQueen"></h2>
+      <p id="modalInfo"></p>
+      <p id="modalRunway"></p>
+
+      <button id="favBtn">❤️ Favorite</button>
+    </div>
+  </div>
 
   <script src="game.js"></script>
 </body>

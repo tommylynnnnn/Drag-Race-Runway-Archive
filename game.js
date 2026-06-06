@@ -5,7 +5,7 @@ const looks = [
     season: 1,
     episode: 0,
     runway: "Best Drag",
-    image: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8a/AkashiaPromoHD.png/revision/latest?cb=20170712132526",
+    image: "https://i.pinimg.com/736x/1c/f3/d0/1cf3d0327704786cd45a5bb364e276cd.jpg",
     colors: ["teal"],
     tags: ["cocktail dress", "camp"]
   },

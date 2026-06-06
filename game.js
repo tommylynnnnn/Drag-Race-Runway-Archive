@@ -31,22 +31,36 @@ const looks = [
   }
 ];
 
-// STORAGE
+// -------------------- STORAGE --------------------
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 let selectedLook = null;
 let activeTags = [];
 
+// -------------------- PAGINATION --------------------
+let currentPage = 1;
+const looksPerPage = 50;
+let currentFilteredLooks = looks;
+
 // -------------------- RENDER GRID --------------------
 function renderLooks(data) {
   const grid = document.getElementById("grid");
+  const loadMoreBtn = document.getElementById("loadMoreBtn");
+
   grid.innerHTML = "";
 
-  data.forEach(l => {
+  const visibleLooks = data.slice(
+    0,
+    currentPage * looksPerPage
+  );
+
+  let html = "";
+
+  visibleLooks.forEach(l => {
     const isFav = favorites.includes(l.id);
 
-    grid.innerHTML += `
+    html += `
       <div class="card" onclick="openModal(${l.id})">
-        <img src="${l.image}" alt="${l.queen}">
+        <img src="${l.image}" alt="${l.queen}" loading="lazy">
         <h3>${l.queen}</h3>
         <p>Season ${l.season} • Episode ${l.episode}</p>
         <p>${l.runway}</p>
@@ -54,6 +68,14 @@ function renderLooks(data) {
       </div>
     `;
   });
+
+  grid.innerHTML = html;
+
+  if (visibleLooks.length >= data.length) {
+    loadMoreBtn.style.display = "none";
+  } else {
+    loadMoreBtn.style.display = "inline-block";
+  }
 }
 
 // -------------------- FILTER SYSTEM --------------------
@@ -64,31 +86,32 @@ function filterLooks() {
 
   let filtered = looks;
 
-  // season filter
   if (season !== "all") {
     filtered = filtered.filter(l => l.season == season);
   }
 
-  // episode filter
   if (episode !== "all") {
     filtered = filtered.filter(l => l.episode == episode);
   }
 
-  // TAG FILTER (IMPORTANT UPGRADE)
   if (activeTags.length > 0) {
     filtered = filtered.filter(l =>
       activeTags.every(tag => l.tags.includes(tag))
     );
   }
 
-  // SEARCH FILTER
   if (search) {
     filtered = filtered.filter(l =>
       l.queen.toLowerCase().includes(search) ||
       l.runway.toLowerCase().includes(search) ||
-      l.tags.some(tag => tag.toLowerCase().includes(search))
+      l.tags.some(tag =>
+        tag.toLowerCase().includes(search)
+      )
     );
   }
+
+  currentFilteredLooks = filtered;
+  currentPage = 1;
 
   renderLooks(filtered);
 }
@@ -132,53 +155,74 @@ function openModal(id) {
   selectedLook = looks.find(l => l.id === id);
 
   document.getElementById("modalImg").src = selectedLook.image;
-  document.getElementById("modalQueen").innerText = selectedLook.queen;
-  document.getElementById("modalInfo").innerText =
+  document.getElementById("modalQueen").textContent = selectedLook.queen;
+
+  document.getElementById("modalInfo").textContent =
     `Season ${selectedLook.season} • Episode ${selectedLook.episode}`;
-  document.getElementById("modalRunway").innerText = selectedLook.runway;
+
+  document.getElementById("modalRunway").textContent =
+    selectedLook.runway;
 
   updateFavButton();
-  document.getElementById("modal").classList.remove("hidden");
+
+  document
+    .getElementById("modal")
+    .classList.remove("hidden");
 }
 
 document.getElementById("closeModal").onclick = () => {
-  document.getElementById("modal").classList.add("hidden");
+  document
+    .getElementById("modal")
+    .classList.add("hidden");
 };
 
 // -------------------- FAVORITES --------------------
 function toggleFavorite() {
   if (!selectedLook) return;
 
-  const id = selectedLook.id;
-
-  if (favorites.includes(id)) {
-    favorites = favorites.filter(f => f !== id);
+  if (favorites.includes(selectedLook.id)) {
+    favorites = favorites.filter(
+      id => id !== selectedLook.id
+    );
   } else {
-    favorites.push(id);
+    favorites.push(selectedLook.id);
   }
 
-  localStorage.setItem("favorites", JSON.stringify(favorites));
+  localStorage.setItem(
+    "favorites",
+    JSON.stringify(favorites)
+  );
 
   updateFavButton();
-  filterLooks(); // IMPORTANT FIX: re-filter instead of full reset
+  renderLooks(currentFilteredLooks);
 }
 
 function updateFavButton() {
   const btn = document.getElementById("favBtn");
 
-  if (!selectedLook) return;
-
-  btn.innerText = favorites.includes(selectedLook.id)
+  btn.textContent = favorites.includes(selectedLook.id)
     ? "💔 Unfavorite"
     : "❤️ Favorite";
 }
 
 // -------------------- EVENTS --------------------
-document.getElementById("favBtn").onclick = toggleFavorite;
+document.getElementById("favBtn").onclick =
+  toggleFavorite;
 
-document.getElementById("searchBar").addEventListener("input", filterLooks);
-document.getElementById("seasonFilter").addEventListener("change", filterLooks);
-document.getElementById("episodeFilter").addEventListener("change", filterLooks);
+document.getElementById("searchBar")
+  .addEventListener("input", filterLooks);
+
+document.getElementById("seasonFilter")
+  .addEventListener("change", filterLooks);
+
+document.getElementById("episodeFilter")
+  .addEventListener("change", filterLooks);
+
+document.getElementById("loadMoreBtn")
+  .addEventListener("click", () => {
+    currentPage++;
+    renderLooks(currentFilteredLooks);
+  });
 
 // -------------------- INIT --------------------
 renderTags();

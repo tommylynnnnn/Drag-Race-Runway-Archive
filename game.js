@@ -1,13 +1,13 @@
 const looks = [
   {
     id: 1,
-    queen: "Sasha Colby",
-    season: 15,
-    episode: 3,
-    runway: "Princess Eleganza",
-    image: "https://via.placeholder.com/300x400",
-    colors: ["gold", "white"],
-    tags: ["elegant", "gown"]
+    queen: "Akashia",
+    season: 1,
+    episode: o,
+    runway: "Best Drag",
+    image: "https://static.wikia.nocookie.net/logosrupaulsdragrace/images/8/8a/AkashiaPromoHD.png/revision/latest?cb=20170712132526",
+    colors: ["teal"],
+    tags: ["cocktail dress", "camp"]
   },
   {
     id: 2,
